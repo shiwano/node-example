@@ -8,8 +8,8 @@ module.exports = function (grunt) {
   // ==========================================================================
 
   grunt.registerMultiTask('coffee', 'Compile CoffeeScript files', function () {
-    var src = this.data.srcDir,
-        dest = this.data.destDir,
+    var srcDir = this.data.srcDir,
+        destDir = this.data.destDir,
         options = grunt.utils._.clone(this.data.options);
 
     var deleteFile = function (filepath) {
@@ -19,26 +19,30 @@ module.exports = function (grunt) {
       }
     };
 
-    var filepaths = grunt.file.expandFiles(path.join(src, '/**/*.coffee'));
+    var filepaths = grunt.file.expandFiles(path.join(srcDir, '/**/*.coffee'));
     grunt.file.clearRequireCache(filepaths);
 
     if (grunt.file.watchFiles) {
       grunt.file.watchFiles.deleted.forEach(function (filepath) {
-        if (filepath.indexOf(src) === 0) {
-          deleteFile(getDestPath(filepath, dest));
+        if (filepath.indexOf(srcDir) === 0) {
+          filepath = filepath.replace(srcDir, destDir).replace(/\.coffee$/, '.js');
+          deleteFile(filepath);
         }
       });
       filepaths = grunt.utils._.intersection(filepaths, grunt.file.watchFiles.changed);
     } else {
-      grunt.file.expandFiles(path.join(dest, '/**/*.js')).forEach(function (filepath) {
-        if (!fs.existsSync(getSrcPath(filepath, src, '.coffee'))) {
+      grunt.file.expandFiles(path.join(destDir, '/**/*.js')).forEach(function (filepath) {
+        srcpath = filepath.replace(destDir, srcDir).replace(/\.js/, '.coffee');
+
+        if (!fs.existsSync(srcpath)) {
           deleteFile(filepath);
         }
       });
     }
 
     filepaths.forEach(function (filepath) {
-      grunt.helper('coffee', filepath, getDestPath(filepath, dest), options);
+      destpath = filepath.replace(srcDir, destDir).replace(/\.coffee$/, '.js');
+      grunt.helper('coffee', filepath, destpath, options);
     });
 
     if (grunt.task.current.errorCount) {
@@ -54,7 +58,8 @@ module.exports = function (grunt) {
 
   grunt.registerHelper('coffee', function (src, dest, options) {
     options = options || {};
-    if( options.bare !== false ) {
+
+    if ( options.bare !== false ) {
       options.bare = true;
     }
 
@@ -67,23 +72,4 @@ module.exports = function (grunt) {
       return false;
     }
   });
-
-  // ==========================================================================
-  // FUNCTIONS
-  // ==========================================================================
-
-  var _getGeneratedPath = function (filepath, genDir, extension, genExtension) {
-    filepath = filepath.replace(path.resolve('.'), '');
-    var firstDirPat = new RegExp('^' + path.sep + '?[^' + path.sep + ']+');
-    genPath = path.dirname(filepath).replace(firstDirPat, genDir);
-    return path.join(genPath, path.basename(filepath, extension) + genExtension);
-  };
-
-  var getDestPath = function (src, destDir) {
-    return _getGeneratedPath(src, destDir, '.coffee', '.js');
-  };
-
-  var getSrcPath = function (dest, srcDir) {
-    return _getGeneratedPath(dest, srcDir, '.js', '.coffee');
-  };
 };

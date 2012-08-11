@@ -17,7 +17,7 @@ module.exports = function(grunt) {
         return (filepath.indexOf(srcDir) === 0);
       });
       var changedFilesViaSrc = changedSrc.map(function (filepath) {
-        return getTestPath(filepath, testDir, suffix);
+        return filepath.replace(srcDir, testDir).replace(/.coffee$/, suffix + '.coffee');
       });
       changedFilesViaSrc = grunt.utils._.intersection(filepaths, changedFilesViaSrc);
       filepaths = grunt.utils._.union(changedFiles, changedFilesViaSrc);
@@ -34,15 +34,4 @@ module.exports = function(grunt) {
       done((status === 0));
     });
   });
-
-  var _getGeneratedPath = function (filepath, genDir, extension, genExtension) {
-    filepath = filepath.replace(path.resolve('.'), '');
-    var firstDirPat = new RegExp('^' + path.sep + '?[^' + path.sep + ']+');
-    genPath = path.dirname(filepath).replace(firstDirPat, genDir);
-    return path.join(genPath, path.basename(filepath, extension) + genExtension);
-  };
-
-  var getTestPath = function (srcPath, testDir, suffix) {
-    return _getGeneratedPath(srcPath, testDir, '.coffee', suffix + '.coffee');
-  };
 };

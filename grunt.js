@@ -4,8 +4,8 @@ module.exports = function(grunt) {
     pkg: '<json:package.json>',
     test: {
       lib: {
-        testDir: 'test',
         srcDir: 'src',
+        testDir: 'test',
         suffix: '_spec'
       }
     },
