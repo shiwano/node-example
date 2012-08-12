@@ -30,8 +30,14 @@ module.exports = function(grunt) {
     var done = this.async();
     var mocha = new Mocha(options);
     filepaths.map(mocha.addFile.bind(mocha));
-    mocha.run(function (status) {
-      done((status === 0));
-    });
+
+    try {
+      mocha.run(function (status) {
+        done((status === 0));
+      });
+    } catch (err) {
+      grunt.log.error(err.stack);
+      done(false);
+    }
   });
 };
