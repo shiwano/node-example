@@ -6,10 +6,12 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('test', 'Run specs with mocha.', function() {
     var testDir = this.data.testDir,
         srcDir = this.data.srcDir,
-        suffix = this.data.suffix;
+        suffix = this.data.suffix,
+        noCaches = this.data.noCaches;
 
     var filepaths = grunt.file.expandFiles(path.join(testDir, '/**/*.coffee'));
     grunt.file.clearRequireCache(filepaths);
+    grunt.file.clearRequireCache(noCaches);
 
     if (grunt.file.watchFiles) {
       var changedFiles = grunt.utils._.intersection(filepaths, grunt.file.watchFiles.changed);
