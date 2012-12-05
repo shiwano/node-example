@@ -1,9 +1,16 @@
-# node-example
+# grunt-init-node-coffee-example
 
-My node.js project example.
+The best project ever.
+
+See also: [shiwano/dotfiles/dot.grunt/tasks/init](https://github.com/shiwano/dotfiles/tree/master/dot.grunt/tasks/init)
 
 ## Getting Started
-_(Coming soon)_
+Install the module with: `npm install grunt-init-node-coffee-example`
+
+```javascript
+var grunt_init_node_coffee_example = require('grunt-init-node-coffee-example');
+grunt_init_node_coffee_example.awesome(); // "awesome"
+```
 
 ## Documentation
 _(Coming soon)_
@@ -12,11 +19,11 @@ _(Coming soon)_
 _(Coming soon)_
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/gruntjs/grunt).
 
 ## Release History
 _(Nothing yet)_
 
 ## License
-Copyright (c) 2012 Shogo Iwano
+Copyright (c) 2012 Shogo Iwano  
 Licensed under the MIT license.

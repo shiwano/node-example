@@ -1,12 +1,12 @@
 {
-  "name": "node-example",
-  "description": "My node.js project example",
+  "name": "grunt-init-node-coffee-example",
+  "description": "The best project ever.",
   "version": "0.1.0",
   "homepage": "https://github.com/shiwano/node-example",
   "author": {
     "name": "Shogo Iwano",
     "email": "shiwano@gmail.com",
-    "url": "http://twitter.com/shiwano"
+    "url": "http://shiwano.com/"
   },
   "repository": {
     "type": "git",
@@ -21,20 +21,23 @@
       "url": "https://github.com/shiwano/node-example/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "lib/example",
+  "main": "lib/index.js",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.6.0"
   },
   "scripts": {
     "test": "grunt test"
   },
+  "dependencies": {
+    "grunt": "~0.4.0a",
+    "grunt-contrib-coffee": "~0.3.2",
+    "grunt-contrib-watch": "~0.1.4"
+  },
   "devDependencies": {
-    "grunt": "~0.3.12",
-    "mocha": "latest",
-    "should": "latest",
-    "sinon": "latest",
-    "coffee-script": "latest",
-    "underscore": "latest"
+    "grunt-simple-mocha": "~0.2.0",
+    "mocha": "~1.7.3",
+    "chai": "~1.4.0",
+    "grunt": "~0.4.0a"
   },
   "keywords": []
 }
