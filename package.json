@@ -29,15 +29,14 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "grunt": "~0.4.0a",
-    "grunt-contrib-coffee": "~0.3.2",
-    "grunt-contrib-watch": "~0.1.4"
   },
   "devDependencies": {
+    "grunt": "~0.4.0a",
+    "grunt-contrib-watch": "~0.1.4",
+    "grunt-contrib-coffee": "~0.3.2",
     "grunt-simple-mocha": "~0.2.0",
     "mocha": "~1.7.3",
-    "chai": "~1.4.0",
-    "grunt": "~0.4.0a"
+    "chai": "~1.4.0"
   },
   "keywords": []
 }
